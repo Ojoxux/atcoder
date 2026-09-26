@@ -30,6 +30,19 @@ submit:
 new:
 	acc new $(CONTEST) $(if $(LANG),--template $(LANG))
 
+# 未開催コンテストの雛形作成: make prep CONTEST=abc477
+prep:
+	@for p in a b c d e f g; do \
+		dir=$(CONTEST)/$$p; \
+		if [ -e $$dir ]; then \
+			echo "skip: $$dir already exists"; \
+		else \
+			mkdir -p $$dir; \
+			cp template.cpp $$dir/main.cpp; \
+			echo "created: $$dir/main.cpp"; \
+		fi; \
+	done
+
 # 問題ページをブラウザで開く: make open CONTEST=abc454 PROBLEM=a
 open:
 	cd $(CONTEST)/$(PROBLEM) && acc open
@@ -39,6 +52,7 @@ help:
 	@echo "  make test CONTEST=abc454 PROBLEM=a           # サンプルテスト実行"
 	@echo "  make submit CONTEST=abc454 PROBLEM=a [FILE=main.rs]  # 提出"
 	@echo "  make new CONTEST=abc454 [LANG=rust]          # コンテスト作成"
+	@echo "  make prep CONTEST=abc454                     # 未開催コンテストの雛形作成"
 	@echo "  make open CONTEST=abc454 PROBLEM=a           # 問題ページを開く"
 
-.PHONY: test submit new open help
+.PHONY: test submit new prep open help
