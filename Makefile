@@ -26,9 +26,9 @@ test:
 submit:
 	cd $(CONTEST)/$(PROBLEM) && acc submit $(FILE)
 
-# コンテスト作成: make new CONTEST=abc454 [LANG=rust]
+# コンテスト作成: make new CONTEST=abc454 [TEMPLATE=rust]
 new:
-	acc new $(CONTEST) $(if $(LANG),--template $(LANG))
+	acc new $(CONTEST) $(if $(TEMPLATE),--template $(TEMPLATE))
 
 # 未開催コンテストの雛形作成: make prep CONTEST=abc477
 prep:
@@ -51,7 +51,7 @@ help:
 	@echo "  make main                                    # main.cpp / main.rs をビルド"
 	@echo "  make test CONTEST=abc454 PROBLEM=a           # サンプルテスト実行"
 	@echo "  make submit CONTEST=abc454 PROBLEM=a [FILE=main.rs]  # 提出"
-	@echo "  make new CONTEST=abc454 [LANG=rust]          # コンテスト作成"
+	@echo "  make new CONTEST=abc454 [TEMPLATE=rust]      # コンテスト作成"
 	@echo "  make prep CONTEST=abc454                     # 未開催コンテストの雛形作成"
 	@echo "  make open CONTEST=abc454 PROBLEM=a           # 問題ページを開く"
 
